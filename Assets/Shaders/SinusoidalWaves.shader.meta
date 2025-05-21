@@ -2,7 +2,8 @@ fileFormatVersion: 2
 guid: df59a8a43af9eba4ab0a85acee842bb5
 ShaderImporter:
   externalObjects: {}
-  defaultTextures: []
+  defaultTextures:
+  - _WaterTexture: {instanceID: 0}
   nonModifiableTextures: []
   userData: 
   assetBundleName: 

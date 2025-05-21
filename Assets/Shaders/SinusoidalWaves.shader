@@ -8,7 +8,6 @@ Shader "Custom/SinusoidalWaves"
         _FresnelPower ("Fresnel Power", Range(1.0, 10.0)) = 5.0
         _WaterTexture ("Water Texture", 2D) = "white" {}
         _TextureScale ("Texture Scale", Float) = 5.0
-
         _Amplitude ("Amplitude (A)", Float) = 1.0
         _WaveLength ("Wave Length (L)", Float) = 10.0
         _Direction ("Direction", Vector) = (1.0, 0.0, 0.0, 0.0)
