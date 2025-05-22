@@ -2,7 +2,7 @@ using UnityEngine;
 
 namespace Waves
 {
-    public class GerstnerWaves : WaveSimulation
+    public class GerstnerWaveSystem : WaveSystem
     {
         public override float GetWaterHeightAt(Vector3 position)
         {

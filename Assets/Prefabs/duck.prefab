@@ -92,7 +92,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1514374789842062076}
-  - component: {fileID: 1279471187861323799}
+  - component: {fileID: 7037610968401364293}
   - component: {fileID: 3509774441500664619}
   m_Layer: 0
   m_Name: duck
@@ -110,15 +110,15 @@ Transform:
   m_GameObject: {fileID: 2184232030683238470}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 0.46609184, y: 1, z: 0.50135356}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 1411050717145380785}
   - {fileID: 1294271906500360366}
   m_Father: {fileID: 0}
-  m_RootOrder: 0
+  m_RootOrder: -1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &1279471187861323799
+--- !u!114 &7037610968401364293
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -127,13 +127,13 @@ MonoBehaviour:
   m_GameObject: {fileID: 2184232030683238470}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 33624a436ae64284fa9555228c8237fd, type: 3}
+  m_Script: {fileID: 11500000, guid: 224b76184f1e5574ea588a74860cf4d9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   density: 997
   volume: 1
   damping: 0.1
-  waveSimulation: {fileID: 0}
+  waveSystem: {fileID: 0}
 --- !u!54 &3509774441500664619
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -142,8 +142,8 @@ Rigidbody:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2184232030683238470}
   serializedVersion: 4
-  m_Mass: 1
-  m_Drag: 0
+  m_Mass: 10
+  m_Drag: 10
   m_AngularDrag: 0.05
   m_CenterOfMass: {x: 0, y: 0, z: 0}
   m_InertiaTensor: {x: 1, y: 1, z: 1}
@@ -158,9 +158,9 @@ Rigidbody:
   m_ImplicitTensor: 1
   m_UseGravity: 1
   m_IsKinematic: 0
-  m_Interpolate: 0
+  m_Interpolate: 1
   m_Constraints: 0
-  m_CollisionDetection: 0
+  m_CollisionDetection: 1
 --- !u!1 &7239000958408651364
 GameObject:
   m_ObjectHideFlags: 0

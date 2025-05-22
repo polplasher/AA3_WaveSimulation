@@ -2,14 +2,14 @@ using UnityEngine;
 
 namespace Waves
 {
-    public abstract class WaveSimulation : MonoBehaviour
+    public abstract class WaveSystem : MonoBehaviour
     {
         // Shader property IDs
-        private static readonly int AmplitudeID = Shader.PropertyToID("_Amplitude");
-        private static readonly int WaveLengthID = Shader.PropertyToID("_WaveLength");
-        private static readonly int DirectionID = Shader.PropertyToID("_Direction");
-        private static readonly int SpeedID = Shader.PropertyToID("_Speed");
-        private static readonly int PhaseID = Shader.PropertyToID("_Phase");
+        private static readonly int AmplitudeID = Shader.PropertyToID("_Amplitude"),
+            WaveLengthID = Shader.PropertyToID("_WaveLength"),
+            DirectionID = Shader.PropertyToID("_Direction"),
+            SpeedID = Shader.PropertyToID("_Speed"),
+            PhaseID = Shader.PropertyToID("_Phase");
 
         [Header("Wave Properties")] public Material waveMaterial;
         public float amplitude = 1.0f;

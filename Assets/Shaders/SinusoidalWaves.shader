@@ -110,7 +110,7 @@ Shader "Custom/SinusoidalWaves"
                 float2 uv = i.worldPos.xz / _TextureScale;
                 float2 uv1 = uv + _Time.y * float2(0.03, 0.04);
                 float2 uv2 = uv * 0.8 - _Time.y * float2(0.04, 0.03);
-                float3 texColor = tex2D(_WaterTexture, uv1).rgb * 0.6 + tex2D(_WaterTexture, uv2).rgb * 0.4;
+                float3 texColor = tex2D(_WaterTexture, uv1).rgb * 0.9 + tex2D(_WaterTexture, uv2).rgb * 0.1;
 
                 // Basic lighting calculation (Lambert)
                 float3 normal = normalize(i.normal);

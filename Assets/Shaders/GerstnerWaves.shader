@@ -1,4 +1,4 @@
-Shader "Custom/SinusoidalWaves"
+Shader "Custom/GerstnerWaves"
 {
     Properties
     {

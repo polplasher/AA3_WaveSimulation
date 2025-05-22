@@ -24,20 +24,20 @@ Material:
     serializedVersion: 3
     m_TexEnvs:
     - _WaterTexture:
-        m_Texture: {fileID: 2800000, guid: 1c1aed58719c336469cf5fac2f6461f2, type: 3}
+        m_Texture: {fileID: 2800000, guid: e8791a1cdb38cca40a5660c59f684533, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     m_Ints: []
     m_Floats:
-    - _Amplitude: 76.7
+    - _Amplitude: 1
     - _FresnelPower: 10
     - _Glossiness: 256
     - _Phase: 0
     - _Speed: 1
-    - _TextureScale: 23
-    - _WaveLength: 10.95
+    - _TextureScale: 5
+    - _WaveLength: 10
     m_Colors:
     - _Color: {r: 1, g: 1, b: 1, a: 1}
-    - _Direction: {r: 1, g: 0, b: 0, a: 0}
+    - _Direction: {r: 1, g: 1, b: 0, a: 0}
     - _SpecularColor: {r: 1, g: 1, b: 1, a: 1}
   m_BuildTextureStacks: []

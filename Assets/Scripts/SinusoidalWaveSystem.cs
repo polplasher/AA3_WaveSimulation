@@ -2,7 +2,7 @@ using UnityEngine;
 
 namespace Waves
 {
-    public class SinusoidalWaves : WaveSimulation
+    public class SinusoidalWaveSystem : WaveSystem
     {
         public override float GetWaterHeightAt(Vector3 position)
         {
