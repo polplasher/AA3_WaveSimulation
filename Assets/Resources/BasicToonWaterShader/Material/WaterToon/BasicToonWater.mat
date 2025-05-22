@@ -138,7 +138,7 @@ Material:
     - _WaveDistortionAmount: 0.1
     - _WaveDistortionSpeed: 0.1
     - _WaveFrequency: 1
-    - _WaveLength: 1.54
+    - _WaveLength: 10
     - _WaveNormalStrength: 0.376
     - _WaveSpeed: 0.04
     - _WaveStrength: 0.591
