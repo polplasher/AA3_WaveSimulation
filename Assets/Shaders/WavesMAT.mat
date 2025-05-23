@@ -7,8 +7,8 @@ Material:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: GerstnerWavesMAT
-  m_Shader: {fileID: 4800000, guid: ba95b88a84ac6d842b337a385fd2a1ac, type: 3}
+  m_Name: WavesMAT
+  m_Shader: {fileID: 4800000, guid: df59a8a43af9eba4ab0a85acee842bb5, type: 3}
   m_Parent: {fileID: 0}
   m_ModifiedSerializedProperties: 0
   m_ValidKeywords: []
@@ -24,17 +24,18 @@ Material:
     serializedVersion: 3
     m_TexEnvs:
     - _WaterTexture:
-        m_Texture: {fileID: 2800000, guid: d8c8c69d5a94abc4b9b8b5ddbb71350d, type: 3}
+        m_Texture: {fileID: 2800000, guid: e8791a1cdb38cca40a5660c59f684533, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     m_Ints: []
     m_Floats:
-    - _Amplitude: 1.2
+    - _Amplitude: 1
     - _FresnelPower: 10
     - _Glossiness: 256
     - _Phase: 0
     - _Speed: 6
-    - _TextureScale: 20
+    - _TextureScale: 14.97
+    - _UseGerstnerWaves: 0
     - _WaveLength: 20
     m_Colors:
     - _Color: {r: 1, g: 1, b: 1, a: 1}

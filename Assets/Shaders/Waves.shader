@@ -1,7 +1,8 @@
-Shader "Custom/GerstnerWaves"
+Shader "Custom/Waves"
 {
     Properties
     {
+        [Toggle] _UseGerstnerWaves ("Use Gerstner Waves", Float) = 0
         _Color ("Base Color", Color) = (1.0, 1.0, 1.0, 1.0)
         _SpecularColor ("Specular Color", Color) = (1.0, 1.0, 1.0, 1.0)
         _Glossiness ("Smoothness", Range(8.0, 256)) = 20
@@ -32,6 +33,7 @@ Shader "Custom/GerstnerWaves"
             #include "UnityCG.cginc"
             #include "UnityLightingCommon.cginc"
 
+            float _UseGerstnerWaves;
             fixed4 _Color;
             fixed4 _SpecularColor;
             float _Glossiness;
@@ -78,10 +80,17 @@ Shader "Custom/GerstnerWaves"
                 // Implementation of formula: A sin(2π/L(x − vt) + φ)
                 float k = 2.0 * UNITY_PI / _WaveLength; // Wave number (2π/L)
                 float f = k * (x - _Speed * _Time.y) + _Phase;
-
-                // Apply displacement only to Y (height)
-                worldPos.x += _Amplitude * cos(f);
-                worldPos.y += _Amplitude * sin(f);
+                
+                // Toggle between Gerstner and Sinusoidal waves
+                if (_UseGerstnerWaves > 0.5) {
+                    // Gerstner waves (horizontal + vertical displacement)
+                    worldPos.x += _Amplitude * cos(f) * dir.x;
+                    worldPos.y += _Amplitude * sin(f);
+                    worldPos.z += _Amplitude * cos(f) * dir.y;
+                } else {
+                    // Sinusoidal waves (vertical displacement only)
+                    worldPos.y += _Amplitude * sin(f);
+                }
 
                 // Transform back to local space
                 float4 localPos = mul(unity_WorldToObject, float4(worldPos, 1.0));
