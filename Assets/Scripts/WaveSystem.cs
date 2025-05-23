@@ -11,18 +11,19 @@ namespace Waves
             SpeedID = Shader.PropertyToID("_Speed"),
             PhaseID = Shader.PropertyToID("_Phase");
 
-        [Header("Wave Properties")] public Material waveMaterial;
-        public float amplitude = 1.0f;
-        public float waveLength = 10.0f;
-        public Vector2 direction = new(1.0f, 0.0f);
-        public float speed = 1.0f;
-        public float phase;
+        [Header("Wave Properties")] 
+        [SerializeField] protected float amplitude = 1.0f;
+        [SerializeField] protected float waveLength = 10.0f;
+        [SerializeField] protected Vector2 direction = new(1.0f, 0.0f);
+        [SerializeField] protected float speed = 1.0f;
+        [SerializeField] protected float phase;
         private MeshRenderer waterMesh;
+        private Material waveMaterial;
 
         protected virtual void Start()
         {
             waterMesh = GetComponent<MeshRenderer>();
-            waveMaterial = waterMesh.material;
+            waveMaterial = waterMesh.sharedMaterial;
 
             UpdateShaderParameters();
         }
@@ -37,7 +38,7 @@ namespace Waves
             if (!waveMaterial)
             {
                 waterMesh = GetComponent<MeshRenderer>();
-                waveMaterial = waterMesh.material;
+                waveMaterial = waterMesh.sharedMaterial;
             }
 
             UpdateShaderParameters();
