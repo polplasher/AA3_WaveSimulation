@@ -110,13 +110,13 @@ Transform:
   m_GameObject: {fileID: 2184232030683238470}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 0.46609184, y: 1, z: 0.50135356}
+  m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 1411050717145380785}
   - {fileID: 1294271906500360366}
   m_Father: {fileID: 0}
-  m_RootOrder: -1
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &7037610968401364293
 MonoBehaviour:
@@ -130,10 +130,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 224b76184f1e5574ea588a74860cf4d9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  density: 997
   volume: 1
   damping: 0.1
+  angularDamping: 0.1
+  waterLevelOffset: 0
   waveSystem: {fileID: 0}
+  buoyancyPoints: []
+  pointRadius: 0.2
+  visualizePoints: 1
+  pointColor: {r: 1, g: 0, b: 0, a: 1}
 --- !u!54 &3509774441500664619
 Rigidbody:
   m_ObjectHideFlags: 0

@@ -6,55 +6,32 @@ namespace Buoyancy
     [RequireComponent(typeof(Rigidbody))]
     public class Buoy : MonoBehaviour
     {
-        [Header("Physical Properties")]
-        [SerializeField] private float density = 997f; // Water density in kg/m³
-        [SerializeField] private float volume = 1.0f; // Total buoy volume
+        private const float WaterDensity = 997f; // Water density in kg/m³
+
+        [Header("Physical Properties")] [SerializeField]
+        private float volume = 1.0f; // Total buoy volume
+
         [SerializeField] private float damping = 0.1f; // Damping
+        [SerializeField] private float angularDamping = 0.1f; // Damping for rotational motion
+        [SerializeField] private float waterLevelOffset; // Fine-tune water level detection
         [SerializeField] private WaveSystem waveSystem;
 
-        [Header("Buoyancy Points")]
-        [SerializeField] private Vector3[] buoyancyPoints; // Points where buoyancy forces are applied
+        [Header("Buoyancy Points")] [SerializeField]
+        private Vector3[] buoyancyPoints; // Points where buoyancy forces are applied
+
         [SerializeField] private float pointRadius = 0.2f; // Radius of each buoyancy point
         [SerializeField] private bool visualizePoints = true; // Debug visualization
         [SerializeField] private Color pointColor = Color.red; // Debug point color
 
-        [Header("Advanced Settings")]
-        [SerializeField] private float angularDamping = 0.1f; // Damping for rotational motion
-        [SerializeField] private float waterLevelOffset = 0f; // Fine-tune water level detection
+        private Rigidbody rb;
+        private float pointVolume; // Volume per buoyancy point
 
-        protected Rigidbody rb;
-        protected float gravity;
-        protected float pointVolume; // Volume per buoyancy point
-
-        protected virtual void Start()
+        private void Start()
         {
             rb = GetComponent<Rigidbody>();
-            gravity = Physics.gravity.y;
-
-            // If no buoyancy points are defined, create a default set
-            if (buoyancyPoints == null || buoyancyPoints.Length == 0)
-            {
-                GenerateDefaultBuoyancyPoints();
-            }
 
             // Calculate volume per point
             pointVolume = volume / buoyancyPoints.Length;
-        }
-
-        private void GenerateDefaultBuoyancyPoints()
-        {
-            // Create a simple cube-like arrangement of 8 points
-            Vector3 extents = transform.localScale * 0.5f;
-            buoyancyPoints = new Vector3[8];
-
-            buoyancyPoints[0] = new Vector3(-extents.x, -extents.y, -extents.z);
-            buoyancyPoints[1] = new Vector3(extents.x, -extents.y, -extents.z);
-            buoyancyPoints[2] = new Vector3(-extents.x, -extents.y, extents.z);
-            buoyancyPoints[3] = new Vector3(extents.x, -extents.y, extents.z);
-            buoyancyPoints[4] = new Vector3(-extents.x, extents.y, -extents.z);
-            buoyancyPoints[5] = new Vector3(extents.x, extents.y, -extents.z);
-            buoyancyPoints[6] = new Vector3(-extents.x, extents.y, extents.z);
-            buoyancyPoints[7] = new Vector3(extents.x, extents.y, extents.z);
         }
 
         private void FixedUpdate()
@@ -94,19 +71,19 @@ namespace Buoyancy
             return submergence;
         }
 
-        protected void ApplyBuoyancyAtPoint(Vector3 point, float displacedVolume, Vector3 normal)
+        private void ApplyBuoyancyAtPoint(Vector3 point, float displacedVolume, Vector3 normal)
         {
             if (displacedVolume <= 0)
                 return;
 
             // Buoyancy force F = ρgV
-            float buoyancyForce = density * Mathf.Abs(gravity) * displacedVolume;
+            float buoyancyForce = WaterDensity * Mathf.Abs(Physics.gravity.y) * displacedVolume;
 
             // Apply force at the specific point
             rb.AddForceAtPosition(normal * buoyancyForce, point, ForceMode.Force);
         }
 
-        private void OnDrawGizmos()
+        private void OnDrawGizmosSelected()
         {
             if (!visualizePoints || buoyancyPoints == null)
                 return;
@@ -119,14 +96,14 @@ namespace Buoyancy
                 Gizmos.DrawSphere(worldPoint, pointRadius);
 
                 // If in play mode, visualize underwater status
-                if (Application.isPlaying && waveSystem != null)
+                if (Application.isPlaying && waveSystem)
                 {
                     float submergence = CalculateSubmergence(worldPoint);
                     if (submergence > 0)
                     {
                         // Draw line showing water level
                         float waterHeight = waveSystem.GetWaterHeightAt(worldPoint) + waterLevelOffset;
-                        Vector3 waterPos = new Vector3(worldPoint.x, waterHeight, worldPoint.z);
+                        Vector3 waterPos = new(worldPoint.x, waterHeight, worldPoint.z);
                         Gizmos.color = Color.blue;
                         Gizmos.DrawLine(worldPoint, waterPos);
                         Gizmos.color = pointColor;

@@ -29,7 +29,6 @@ Shader "Custom/Waves"
             CGPROGRAM
             #pragma vertex vert
             #pragma fragment frag
-            #pragma multi_compile_fog
             #include "UnityCG.cginc"
             #include "UnityLightingCommon.cginc"
 
@@ -60,7 +59,6 @@ Shader "Custom/Waves"
                 float3 worldPos : TEXCOORD1;
                 float3 normal : NORMAL;
                 float3 viewDir : TEXCOORD2;
-                UNITY_FOG_COORDS(3)
                 float4 vertex : SV_POSITION;
             };
 
@@ -80,14 +78,17 @@ Shader "Custom/Waves"
                 // Implementation of formula: A sin(2π/L(x − vt) + φ)
                 float k = 2.0 * UNITY_PI / _WaveLength; // Wave number (2π/L)
                 float f = k * (x - _Speed * _Time.y) + _Phase;
-                
+
                 // Toggle between Gerstner and Sinusoidal waves
-                if (_UseGerstnerWaves > 0.5) {
+                if (_UseGerstnerWaves > 0.5)
+                {
                     // Gerstner waves (horizontal + vertical displacement)
                     worldPos.x += _Amplitude * cos(f) * dir.x;
                     worldPos.y += _Amplitude * sin(f);
                     worldPos.z += _Amplitude * cos(f) * dir.y;
-                } else {
+                }
+                else
+                {
                     // Sinusoidal waves (vertical displacement only)
                     worldPos.y += _Amplitude * sin(f);
                 }
@@ -109,7 +110,6 @@ Shader "Custom/Waves"
                 o.normal = UnityObjectToWorldNormal(normal);
                 o.viewDir = normalize(_WorldSpaceCameraPos - worldPos);
 
-                UNITY_TRANSFER_FOG(o, o.vertex);
                 return o;
             }
 
@@ -139,7 +139,6 @@ Shader "Custom/Waves"
                 float3 finalColor = lerp(_Color.rgb * texColor * diffuse, _SpecularColor.rgb, fresnel) + specular;
 
                 fixed4 col = fixed4(finalColor, 1.0);
-                UNITY_APPLY_FOG(i.fogCoord, col);
                 return col;
             }
             ENDCG
