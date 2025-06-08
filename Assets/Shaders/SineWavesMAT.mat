@@ -34,7 +34,7 @@ Material:
     - _Glossiness: 256
     - _Phase: 0
     - _Speed: 6
-    - _TextureScale: 14.97
+    - _TextureScale: 15
     - _UseGerstnerWaves: 0
     - _WaveLength: 20
     m_Colors:

@@ -83,9 +83,9 @@ Shader "Custom/Waves"
                 if (_UseGerstnerWaves > 0.5)
                 {
                     // Gerstner waves (horizontal + vertical displacement)
-                    worldPos.x += _Amplitude * cos(f) * dir.x;
-                    worldPos.y += _Amplitude * sin(f);
-                    worldPos.z += _Amplitude * cos(f) * dir.y;
+                    worldPos.x -= dir.x * _Amplitude * sin(f);
+                    worldPos.y += _Amplitude * cos(f);
+                    worldPos.z -= dir.y * _Amplitude * sin(f);
                 }
                 else
                 {
@@ -98,8 +98,18 @@ Shader "Custom/Waves"
 
                 // Calculate more precise normals for waves
                 float3 normal = v.normal;
-                normal.x = -dir.x * k * _Amplitude * cos(f);
-                normal.z = -dir.y * k * _Amplitude * cos(f);
+
+                if (_UseGerstnerWaves > 0.5)
+                {
+                    normal.x = -dir.x * k * _Amplitude * sin(f);
+                    normal.z = -dir.y * k * _Amplitude * sin(f);
+                }
+                else
+                {
+                    normal.x = -dir.x * k * _Amplitude * cos(f);
+                    normal.z = -dir.y * k * _Amplitude * cos(f);
+                }
+
                 normal.y = 1.0;
                 normal = normalize(normal);
 
