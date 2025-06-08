@@ -1,4 +1,3 @@
-using Buoyancy;
 using Cinemachine;
 using UnityEngine;
 
@@ -9,23 +8,36 @@ namespace Utilities
         [SerializeField] private float zoomSpeed = 5f;
         [SerializeField] private float minRadius = 5f;
         [SerializeField] private float maxRadius = 20f;
-        
+
         private CinemachineFreeLook freeLookCamera;
-        private Buoy[] buoys;
-        private int currentBuoyIndex;
-        private Transform Target => buoys[currentBuoyIndex].transform;
+        public Buoy[] Buoys { get; private set; }
+
+        public int CurrentBuoyIndex
+        {
+            get => freeLookCamera.Follow ? System.Array.IndexOf(Buoys, freeLookCamera.Follow.GetComponent<Buoy>()) : -1;
+            set
+            {
+                if (!Buoys[value])
+                    return;
+
+                freeLookCamera.Follow = Buoys[value].transform;
+                freeLookCamera.LookAt = Buoys[value].transform;
+            }
+        }
 
         private void Start()
         {
             freeLookCamera = GetComponent<CinemachineFreeLook>();
-            buoys = FindObjectsOfType<Buoy>();
+            Buoys = FindObjectsOfType<Buoy>();
+            freeLookCamera.Follow = Buoys[0].transform;
+            freeLookCamera.LookAt = Buoys[0].transform;
         }
 
         private void Update()
         {
-            if (!Target)
+            if (!freeLookCamera.Follow)
                 return;
-            
+
             // Manage camera zoom with mouse scroll
             float scroll = Input.GetAxis("Mouse ScrollWheel");
             if (scroll != 0f)
@@ -60,12 +72,6 @@ namespace Utilities
                 freeLookCamera.m_XAxis.m_InputAxisValue = 0;
                 freeLookCamera.m_YAxis.m_InputAxisValue = 0;
             }
-        }
-
-        public void SetBuoys(Buoy[] buoys)
-        {
-            this.buoys = buoys;
-            currentBuoyIndex = 0;
         }
     }
 }
